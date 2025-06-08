@@ -32,3 +32,5 @@ npm run dev
 npm run build
 ```
 # FrontendProdutos-SPA-
+
+Esse projeto em Vue + vite, agrega no conceitos de CRUD + Autenticação com o laravel funcionando como uma api.
