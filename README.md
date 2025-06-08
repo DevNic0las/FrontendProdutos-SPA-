@@ -1,36 +1,28 @@
-# spaProdutos
+# 🛍️ spaProdutos
 
-This template should help get you started developing with Vue 3 in Vite.
+Este projeto é uma aplicação **Single Page Application (SPA)** usando **Vue 3** com **Vite** e **Laravel como API** para autenticação e funcionalidades de **CRUD de produtos**.
 
-## Recommended IDE Setup
+---
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 🛠️ Tecnologias Usadas
 
-## Type Support for `.vue` Imports in TS
+- Vue 3
+- Vite
+- TypeScript
+- Laravel (API)
+- Volar (extensão recomendada para VSCode)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+---
 
-## Customize configuration
+## 🧩 Configuração do Projeto
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+### 🔧 Instalação
+```bash
 npm install
-```
 
-### Compile and Hot-Reload for Development
-
-```sh
+🚀 ### Desenvolvimento (com recarregamento automático)
 npm run dev
-```
 
-### Type-Check, Compile and Minify for Production
-
-```sh
+### Verificação de tipos + build de produção
 npm run build
-```
-# FrontendProdutos-SPA-
 
-Esse projeto em Vue + vite, agrega no conceitos de CRUD + Autenticação com o laravel funcionando como uma api.
