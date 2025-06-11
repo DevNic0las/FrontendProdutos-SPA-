@@ -1,19 +1,46 @@
 <template>
-  <form @submit.prevent=handleSubmit>
-    <input
-      v-model="product_name"
-      :placeholder="props.isEdit ? 'Edite o nome' : 'crie'"
-    />
-    <input
-      v-model="price"
-      type="number"
-      :placeholder="props.isEdit ? 'Novo valor' : 'Adicne um valor'"
-    />
-    <input
-      v-model="amount"
-      :placeholder="props.isEdit ? 'Nova quantia' : 'Insira uma nova quantia'"
-    />
-    <button>Enviar</button>
+  <form
+    @submit.prevent="handleSubmit"
+    class="bg-white p-6 rounded-xl shadow-md space-y-4 max-w-md mx-auto"
+  >
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1"
+        >Nome do Produto</label
+      >
+      <input
+        v-model="product_name"
+        :placeholder="props.isEdit ? 'Edite o nome' : 'Crie'"
+        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Preço</label>
+      <input
+        v-model="price"
+        type="number"
+        :placeholder="props.isEdit ? 'Novo valor' : 'Adicione um valor'"
+        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1"
+        >Quantidade</label
+      >
+      <input
+        v-model="amount"
+        :placeholder="props.isEdit ? 'Nova quantia' : 'Insira uma quantia'"
+        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200"
+    >
+      {{ props.isEdit ? "Atualizar" : "Criar" }}
+    </button>
   </form>
 </template>
 <script setup>
@@ -57,9 +84,9 @@ const createProduct = async () => {
 };
 const handleSubmit = async () => {
   if (props.isEdit) {
-   await updateProduct()
-  }else{
-    await createProduct()
+    await updateProduct();
+  } else {
+    await createProduct();
   }
 };
 </script>

@@ -19,7 +19,7 @@
       <span class="text-gray-500 text-sm">{{ slug }}</span>
       <span class="text-gray-600 font-medium">R$ {{ price }}</span>
       <span class="text-gray-600">{{ amount }}</span>
-      <GroupButtons @delete="listenEmit" @uptade="listenEmit" />
+      <GroupButtons @delete="listenEmit" @uptade="listenEmit" @show="listenEmit" />
     </div>
   </div>
 </template>
@@ -29,9 +29,10 @@ import { defineProps } from "vue";
 import GroupButtons from "./GroupButtons.vue";
 import { useFetch } from "@/composables/useFetch";
 import Modal from "./Modal.vue";
+import { useRouter } from "vue-router";
 import { ref } from "vue";
 const showModal = ref(false);
-
+const router = useRouter();
 const props = defineProps({
   product_name: {
     type: String,
@@ -42,11 +43,11 @@ const props = defineProps({
     required: true,
   },
   price: {
-    type: Number,
+    type: String,
     required: true,
   },
   amount: {
-    type: String,
+    type: Number,
     required: true,
   },
   id: {
@@ -72,6 +73,9 @@ const listenEmit = async (message: string) => {
   }
   if (message === "update") {
     showModal.value = true;
+  }
+  if(message==="show"){
+   return router.push(`/view/product/${id}`)
   }
   console.log(message);
 };
