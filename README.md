@@ -26,7 +26,7 @@ npm run dev
 ### Verificação de tipos + build de produção
 npm run build
 
-```bash
+---
 ##BackEnd
 Se quiser apenas o backend com toda lógica encapsulada segue o link:
 https://github.com/DevNic0las/apiProdutosLaravel
