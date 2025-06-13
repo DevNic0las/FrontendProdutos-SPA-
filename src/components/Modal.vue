@@ -8,11 +8,26 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  id:{
-    type:Number,
-    required: true
+  id: {
+    type: Number,
+    required: false,
+  },
+  category: {
+    type: Array,
+    required: true,
+  },
+  categoryName: {
+    type: String,
+    required: true,
+  },
+  isCreateCategory: {
+    type: Boolean,
+    default: false
   }
 });
+console.log(props.id);
+
+console.log(props.category);
 
 const emit = defineEmits(["close"]);
 
@@ -24,6 +39,7 @@ const formData = reactive({
   product_name: "",
   price: "",
   amount: null,
+  categories_id: 0,
 });
 </script>
 <template>
@@ -36,9 +52,9 @@ const formData = reactive({
         class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-8 space-y-6 transition-all"
       >
         <div class="flex justify-between items-center">
-          <h2 class="text-2xl font-semibold text-gray-800">
-            {{ props.isEdit ? "Editar Produto" : "Criar Produto" }}
-          </h2>
+          <h2 class="text-2xl font-semibold text-gray-800" >
+            {{ props.isEdit ? "Editar Produto" : "Criar Produto"  }}
+          </h2 class="text-2xl font-semibold text-gray-800">
           <button
             @click="$emit('close')"
             class="text-gray-400 hover:text-gray-600 transition"
@@ -53,8 +69,12 @@ const formData = reactive({
             v-model:product_name="formData.product_name"
             v-model:price="formData.price"
             v-model:amount="formData.amount"
+            v-model:categories_id="formData.categories_id"
+            :categoryName="props.categoryName"
             :isEdit="props.isEdit"
+            :category="props.category"
             :id="props.id"
+            @close="$emit('close')"
           />
         </div>
 

@@ -35,6 +35,34 @@
       />
     </div>
 
+    <div v-if="!props.isEdit">
+      <label class="block text-sm font-medium text-gray-700 mb-1"
+        >Categoria</label
+      >
+      <select
+        v-model.number="category_id"
+        id="category"
+        name="category"
+        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm text-gray-700"
+      >
+        <option disabled selected value="">Selecione uma categoria</option>
+        <option v-for="item in props.category" :key="item.id" :value="item.id">
+          {{ item.categorie_name }}
+        </option>
+      </select>
+    </div>
+
+    <div v-else>
+      <label class="block text-sm font-medium text-gray-700 mb-1"
+        >Categoria</label
+      >
+      <input
+        :value="props.categoryName"
+        disabled
+        class="w-full px-4 py-2 border rounded-lg bg-gray-100 text-gray-600"
+      />
+    </div>
+
     <button
       type="submit"
       class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200"
@@ -43,21 +71,23 @@
     </button>
   </form>
 </template>
+
 <script setup>
 import { useFetch } from "@/composables/useFetch";
 
 const product_name = defineModel("product_name");
 const price = defineModel("price");
 const amount = defineModel("amount");
+const category_id = defineModel("category_id");
+const emit = defineEmits(['close'])
+const closeModel = ()=>{
+  emit("close");
+}
 const props = defineProps({
-  isEdit: {
-    type: Boolean,
-    default: false,
-  },
-  id: {
-    type: Number,
-    required: true,
-  },
+  isEdit: { type: Boolean, default: false },
+  id: { type: Number, required: true },
+  category: { type: Array, required: true },
+  categoryName: { type: String, required: true },
 });
 
 const updateProduct = async () => {
@@ -65,9 +95,9 @@ const updateProduct = async () => {
     product_name: product_name.value,
     price: price.value,
     amount: amount.value,
+    categories_id: category_id.value,
   };
-  const { data, error } = await useFetch(`/products/${props.id}`, "PUT", form);
-  console.log(data.value);
+  const { data } = await useFetch(`/products/${props.id}`, "PUT", form);
   return data;
 };
 
@@ -76,15 +106,17 @@ const createProduct = async () => {
     product_name: product_name.value,
     price: price.value,
     amount: amount.value,
+    categories_id: category_id.value,
   };
-  const { data, error } = await useFetch("/products", "POST", form);
-  console.log(data);
-
+  const { data } = await useFetch("/products", "POST", form);
+ 
   return data;
 };
+
 const handleSubmit = async () => {
   if (props.isEdit) {
     await updateProduct();
+    closeModel()
   } else {
     await createProduct();
   }

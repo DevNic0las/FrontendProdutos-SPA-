@@ -1,25 +1,34 @@
 <template>
-  <Modal :isOpen="showModal" :isEdit="true" @close="showModal = false" :id="props.id" />
+  <Modal
+    :isOpen="showModal"
+    :isEdit="true"
+    @close="showModal = false"
+    :id="props.id"
+    :categoryName="props.categoryName"
+  />
 
-   <div class="p-6 space-y-2">
+  <div class="p-6 space-y-4">
     <!-- Cabeçalho -->
-    <div class="grid grid-cols-5 font-semibold text-gray-700 border-b pb-2">
+    <div class="grid grid-cols-6 items-center bg-gray-100 rounded-lg px-4 py-3 font-semibold text-gray-700 shadow-sm">
       <span>Produto</span>
       <span>Slug</span>
       <span>Preço</span>
       <span>Estoque</span>
-      <span>Ações</span>
+      <span>Categoria</span>
+      <span class="text-center">Ações</span>
     </div>
 
-    <!-- Linha de produto -->
     <div
-      class=" grid grid-cols-5 items-center bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition duration-200"
+      class="grid grid-cols-6 items-center bg-white rounded-xl shadow p-4 hover:shadow-lg transition duration-200 border border-gray-100"
     >
-      <span class="text-gray-800">{{ product_name }}</span>
-      <span class="text-gray-500 text-sm">{{ slug }}</span>
-      <span class="text-gray-600 font-medium">R$ {{ price }}</span>
-      <span class="text-gray-600">{{ amount }}</span>
-      <GroupButtons @delete="listenEmit" @uptade="listenEmit" @show="listenEmit" />
+      <span class="text-gray-900 font-medium">{{ product_name }}</span>
+      <span class="text-gray-500 text-sm truncate">{{ slug }}</span>
+      <span class="text-green-600 font-semibold">R$ {{ price }}</span>
+      <span class="text-gray-700 font-medium">{{ amount }}</span>
+      <span class="text-indigo-600 font-semibold">{{ categoryName }}</span>
+      <div class="flex justify-center gap-2">
+        <GroupButtons @delete="listenEmit" @uptade="listenEmit" @show="listenEmit" />
+      </div>
     </div>
   </div>
 </template>
@@ -54,8 +63,12 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  categoryName:{
+    type: String,
+    required: true
+  }
 });
-const { product_name, slug, price, amount, id } = props;
+const { product_name, slug, price, amount, id,categoryName } = props;
 
 const deleteProduct = async () => {
   const { data, error } = await useFetch(

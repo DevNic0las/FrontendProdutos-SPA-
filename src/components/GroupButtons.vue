@@ -13,6 +13,7 @@
       Deletar
     </button>
  <button
+      v-if="isCategoryClass"
       @click="showMore"
       class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-red-700 transition"
     >
@@ -25,6 +26,7 @@
 <script setup lang="ts">
 import { defineEmits } from "vue";
 const emit = defineEmits(["delete", "uptade", "show"]);
+const props = defineProps({isCategoryClass:{type:Boolean, default:true}})
 const uptadeProduct = ()=>{
     emit("uptade", "update")
 }
