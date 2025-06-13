@@ -1,14 +1,14 @@
 import { ref } from "vue";
 import Cookies from "js-cookie";
 
-export async function useFetch(url: string, method: string, dataJson?: object) {
-  const data = ref(null);
+export async function useFetch<T = any>(url: string, method: string, dataJson?: object) {
+  const data = ref<T | null>(null);
   const error = ref<string | null>(null);
 
   try {
     const csrfToken = decodeURIComponent(Cookies.get("XSRF-TOKEN") || "");
     const token = decodeURIComponent(Cookies.get("api-token") || "");
-    
+  
     const options: RequestInit = {
       credentials: "include",
       method: method,

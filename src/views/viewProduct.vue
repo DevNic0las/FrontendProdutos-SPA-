@@ -53,6 +53,9 @@ const id = route.params.id;
 const productFind = ref(null);
 
 onMounted(async () => {
+  if (!Cookies.get("api-token")) {
+    return router.push("/login");
+  }
   const { data, error } = await useFetch(`/products/${id}`, "GET", undefined);
   productFind.value = data.value.data;
   console.log(productFind);
